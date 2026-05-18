@@ -1,6 +1,14 @@
 <x-layouts::auth>
     <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('HOD Log in to your Department Account')" :description="__('Enter your email and password below to log in')" />
+
+        @if (request()->routeIs('lecturer-login'))
+            <x-auth-header :title="__('Log in to your Lecturer Account')" :description="__('Enter your email and password below to log in')" />
+        @elseif (request()->routeIs('lecturer-login'))
+            <x-auth-header :title="__('Log in to your Account HOD')" :description="__('Enter your email and password below to log in')" />
+        @else
+            <x-auth-header :title="__('Log in to your Account Here')" :description="__('Enter your email and password below to log in')" />
+        @endif
+
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
@@ -9,28 +17,13 @@
             @csrf
 
             <!-- Email Address -->
-            <flux:input
-                name="email"
-                :label="__('Email address')"
-                :value="old('email')"
-                type="email"
-                required
-                autofocus
-                autocomplete="email"
-                placeholder="email@example.com"
-            />
+            <flux:input name="email" :label="__('Email address')" :value="old('email')" type="email" required
+                autofocus autocomplete="email" placeholder="email@example.com" />
 
             <!-- Password -->
             <div class="relative">
-                <flux:input
-                    name="password"
-                    :label="__('Password')"
-                    type="password"
-                    required
-                    autocomplete="current-password"
-                    :placeholder="__('Password')"
-                    viewable
-                />
+                <flux:input name="password" :label="__('Password')" type="password" required
+                    autocomplete="current-password" :placeholder="__('Password')" viewable />
 
                 @if (Route::has('password.request'))
                     <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>

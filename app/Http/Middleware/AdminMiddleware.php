@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\ElseIf_;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
@@ -19,6 +20,10 @@ class AdminMiddleware
         // Admins and Super Admins usually have access to Admin areas
         if (Auth::check() && Auth::user()->role === 'admin') {
             return $next($request);
+        }elseif (Auth::check() && Auth::user()->role === 'nobody') {
+            // logout the user if they have the 'nobody' role
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['Your account has no role assigned. Please contact the administrator.    ']);
         }
 
         abort(403, 'Unauthorized access.');

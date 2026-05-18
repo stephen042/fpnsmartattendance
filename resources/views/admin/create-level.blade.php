@@ -12,7 +12,7 @@
         <flux:card class="bg-zinc-50/80 dark:bg-zinc-900/50 border-zinc-200/60 shadow-sm">
             <div class="flex items-center gap-2 mb-6">
                 <flux:icon name="academic-cap" variant="outline" class="text-zinc-400" />
-                <flux:heading size="lg">Level Management</flux:heading>
+                <flux:heading size="lg">Create and Manage Level</flux:heading>
             </div>
 
             <div
@@ -52,7 +52,7 @@
         <flux:card class="bg-zinc-50/80 dark:bg-zinc-900/50 border-zinc-200/60 shadow-sm">
             <div class="flex items-center gap-2 mb-6">
                 <flux:icon name="clock" variant="outline" class="text-zinc-400" />
-                <flux:heading size="lg">Programme Management</flux:heading>
+                <flux:heading size="lg">Create And Manage Programme</flux:heading>
             </div>
 
             <div
@@ -71,8 +71,54 @@
                     <flux:table.row>
                         <flux:table.cell align="center" class="font-medium">Morning</flux:table.cell>
                         <flux:table.cell align="center">
-                            <flux:button variant="ghost" size="sm" icon="trash" style="color: #dc2626;border: 1px dashed #dc2626;">Delete
+                            <flux:button variant="ghost" size="sm" icon="trash"
+                                style="color: #dc2626;border: 1px dashed #dc2626;">Delete
                             </flux:button>
+                        </flux:table.cell>
+                    </flux:table.row>
+                </flux:table.rows>
+            </flux:table>
+        </flux:card>
+
+        {{-- Course Option Card --}}
+        <flux:card class="bg-zinc-50/80 dark:bg-zinc-900/50 border-zinc-200/60 shadow-sm mt-8">
+            <div class="flex items-center gap-2 mb-6">
+                <flux:icon name="book-open" variant="outline" class="text-zinc-400" />
+                <flux:heading size="lg">Create and Manage Course Option</flux:heading>
+            </div>
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end mb-8 bg-white/50 dark:bg-white/[0.02] p-4 rounded-xl border border-zinc-200/50">
+                <flux:select label="Select Level" placeholder="Choose Level...">
+                    <flux:select.option>High National Diploma 1</flux:select.option>
+                    <flux:select.option>High National Diploma 2</flux:select.option>
+                </flux:select>
+
+                <flux:input label="Option Name" placeholder="Software And Web Development" />
+                <flux:input label="Option Abbreviation" placeholder="SWD" />
+
+                <flux:button variant="primary" icon="plus" class="w-full">Create Option</flux:button>
+            </div>
+
+            <flux:table>
+                <flux:table.columns>
+                    <flux:table.column>Level</flux:table.column>
+                    <flux:table.column>Option Name</flux:table.column>
+                    <flux:table.column align="center">Abbreviation</flux:table.column>
+                    <flux:table.column align="center">Action</flux:table.column>
+                </flux:table.columns>
+
+                <flux:table.rows>
+                    <flux:table.row>
+                        <flux:table.cell class="text-zinc-500">HND1</flux:table.cell>
+                        <flux:table.cell class="font-medium">Software And Web Development</flux:table.cell>
+                        <flux:table.cell align="center">
+                            <flux:badge color="zinc">SWD</flux:badge>
+                        </flux:table.cell>
+                        <flux:table.cell align="center">
+                            <flux:modal.trigger name="edit-course-option">
+                                <flux:button variant="ghost" size="sm" icon="pencil-square">Edit</flux:button>
+                            </flux:modal.trigger>
                         </flux:table.cell>
                     </flux:table.row>
                 </flux:table.rows>
@@ -88,13 +134,44 @@
         </div>
 
         <div class="space-y-4">
-            <flux:input label="Level Name" value="National Diploma 1"/>
+            <flux:input label="Level Name" value="National Diploma 1" />
             <flux:input label="Abbreviation" value="ND1" />
         </div>
 
         <div class="flex flex-col-reverse md:flex-row justify-between gap-3 mt-6">
             <flux:button variant="ghost" icon="trash" style="color: #dc2626;border: 1px dashed #dc2626;">
                 Delete Level
+            </flux:button>
+
+            <div class="flex gap-2">
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancel</flux:button>
+                </flux:modal.close>
+                <flux:button variant="primary">Save Changes</flux:button>
+            </div>
+        </div>
+    </flux:modal>
+
+    {{-- Edit Course Option Modal --}}
+    <flux:modal name="edit-course-option" class="md:w-[500px] space-y-6">
+        <div>
+            <flux:heading size="lg">Edit Course Option</flux:heading>
+            <flux:subheading>Update the department or program option details.</flux:subheading>
+        </div>
+
+        <div class="space-y-4">
+            <flux:select label="Level" value="HND1">
+                <flux:select.option>High National Diploma 1</flux:select.option>
+                <flux:select.option>High National Diploma 2</flux:select.option>
+            </flux:select>
+
+            <flux:input label="Option Name" value="Software And Web Development" />
+            <flux:input label="Option Abbreviation" value="SWD" />
+        </div>
+
+        <div class="flex flex-col-reverse md:flex-row justify-between gap-3 mt-6">
+            <flux:button variant="ghost" icon="trash" style="color: #dc2626; border: 1px dashed #dc2626;">
+                Delete Option
             </flux:button>
 
             <div class="flex gap-2">

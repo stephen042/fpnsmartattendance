@@ -5,47 +5,58 @@
         <!-- Header -->
         <div class="flex items-center justify-between">
             <h1 class="text-2xl font-bold">Smart Attendance Dashboard</h1>
-            <flux:button variant="primary" color="red">
+            {{-- <flux:button variant="primary" color="red">
                 Stop Session Today
-            </flux:button>
+            </flux:button> --}}
         </div>
 
-        <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <!-- Card -->
-            <div class="p-6 rounded-xl shadow bg-white dark:bg-neutral-900">
-                <p class="text-sm opacity-70">Total Enrolled Students</p>
-                <p class="text-3xl font-bold">120</p>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
 
-            <div class="p-6 rounded-xl shadow bg-white dark:bg-neutral-900">
-                <p class="text-sm opacity-70">Total Marked Today</p>
-                <p class="text-3xl font-bold">85</p>
-            </div>
-
-            <div class="p-6 rounded-xl shadow bg-white dark:bg-neutral-900">
-                <p class="text-sm opacity-70">Total Absent Today</p>
-                <p class="text-3xl font-bold">35</p>
+            <div
+                class="p-6 rounded-xl shadow bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800">
+                <p class="text-sm font-medium opacity-70">Total Enrolled Students</p>
+                <p class="text-4xl font-bold mt-1">13,567</p>
+                <div class="flex gap-4 mt-3 pt-3 border-t border-gray-100 dark:border-neutral-800">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider opacity-50 block">Male</span>
+                        <span class="text-sm font-semibold text-blue-600 dark:text-blue-400">340</span>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-wider opacity-50 block">Female</span>
+                        <span class="text-sm font-semibold text-pink-600 dark:text-pink-400">250</span>
+                    </div>
+                </div>
             </div>
 
             <div
-                class="p-6 rounded-xl shadow bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 transition-colors">
-                <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Session Status</p>
-                <p class="text-lg font-bold text-green-500 mb-2">Active</p>
+                class="p-6 rounded-xl shadow bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800">
+                <p class="text-sm font-medium opacity-70">Total Lecturers</p>
+                <p class="text-4xl font-bold mt-1">285</p>
+                <div class="flex gap-4 mt-3 pt-3 border-t border-gray-100 dark:border-neutral-800">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider opacity-50 block">Male</span>
+                        <span class="text-sm font-semibold text-blue-600 dark:text-blue-400">150</span>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-wider opacity-50 block">Female</span>
+                        <span class="text-sm font-semibold text-pink-600 dark:text-pink-400">135</span>
+                    </div>
+                </div>
+            </div>
 
-                <div class="space-y-1 border-t border-zinc-50 dark:border-zinc-800 pt-2">
-                    <div class="flex items-center gap-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
-                        <p class="text-xs text-zinc-500 dark:text-zinc-500">
-                            Started at <span class="font-semibold text-zinc-700 dark:text-zinc-300">9:00 AM</span>
-                        </p>
+            <div
+                class="p-6 rounded-xl shadow bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800">
+                <p class="text-sm font-medium opacity-70">Total Courses</p>
+                <p class="text-4xl font-bold mt-1">467</p>
+                <div class="flex gap-4 mt-3 pt-3 border-t border-gray-100 dark:border-neutral-800">
+                    <div>
+                        <span class="text-xs uppercase tracking-wider opacity-50 block">OnGoing</span>
+                        <span class="text-sm font-semibold text-green-600">145</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-600"></div>
-                        <p class="text-xs text-zinc-500 dark:text-zinc-500">
-                            Scheduled end <span class="font-semibold text-zinc-700 dark:text-zinc-300">4:00 PM</span>
-                        </p>
-                    </div>
+                    {{-- <div>
+                        <span class="text-xs uppercase tracking-wider opacity-50 block">Pending</span>
+                        <span class="text-sm font-semibold text-yellow-600">317</span>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -76,7 +87,8 @@
                     </select>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">Students Programme</label>
+                    <label class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">Students
+                        Programme</label>
                     <select
                         class="w-full bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:text-white">
                         <option selected>Select Programme</option>
@@ -87,7 +99,7 @@
                 </div>
 
                 <div class="space-y-1">
-                    <label class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">Specialization</label>
+                    <label class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">Specialization (<span class="text-red-500 lowercase">Optional</span>)</label>
                     <select
                         class="w-full bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2 dark:text-white">
                         <option selected>Select Course Option</option>
@@ -130,7 +142,7 @@
                             <div class="w-2 h-2 rounded-full bg-blue-500"></div>
                             <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Total Enrolled</span>
                         </div>
-                        <span class="text-sm font-bold text-zinc-900 dark:text-white">200</span>
+                        <span class="text-sm font-bold text-zinc-900 dark:text-white">13,567</span>
                     </div>
 
                     <div class="flex items-center justify-between">
@@ -138,7 +150,7 @@
                             <div class="w-2 h-2 rounded-full bg-green-500"></div>
                             <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Present Today</span>
                         </div>
-                        <span class="text-sm font-bold text-zinc-900 dark:text-white">140</span>
+                        <span class="text-sm font-bold text-zinc-900 dark:text-white">12,345</span>
                     </div>
 
                     <div class="flex items-center justify-between">
@@ -147,7 +159,7 @@
                             <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Absent / Not
                                 Logged</span>
                         </div>
-                        <span class="text-sm font-bold text-zinc-900 dark:text-white">60</span>
+                        <span class="text-sm font-bold text-zinc-900 dark:text-white">1,222</span>
                     </div>
 
                     <div class="pt-2">

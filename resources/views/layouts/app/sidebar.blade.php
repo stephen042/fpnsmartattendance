@@ -6,32 +6,86 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
+    @foreach (['success', 'error', 'info'] as $type)
+        @if (session($type))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 6000)" x-show="show" x-transition
+                class="fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg
+            {{ $type === 'success' ? 'bg-green-500' : '' }}
+            {{ $type === 'error' ? 'bg-red-500' : '' }}
+            {{ $type === 'info' ? 'bg-blue-500' : '' }}">
+                {{ session($type) }}
+            </div>
+        @endif
+    @endforeach
     <flux:sidebar sticky collapsible="mobile"
         class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-        <flux:sidebar.header>
-            <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" />
-            <flux:sidebar.collapse class="lg:hidden" />
-        </flux:sidebar.header>
+        @if (auth()->user()->role === 'admin')
+            <flux:sidebar.header>
+                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" />
+                <flux:sidebar.collapse class="lg:hidden" />
+            </flux:sidebar.header>
 
-        <flux:sidebar.nav>
-            <flux:sidebar.group :heading="__('Platform')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')">
-                    {{ __('Overview') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="user-plus" :href="route('student-enrollment')"
-                    :current="request()->routeIs('student-enrollment')">
-                    {{ __('Student Enrollment') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="academic-cap" :href="route('create-level')"
-                    :current="request()->routeIs('create-level')">
-                    {{ __('Create Level') }}
-                </flux:sidebar.item>
-            </flux:sidebar.group>
-        </flux:sidebar.nav>
+            <flux:sidebar.nav>
+                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                    <flux:sidebar.item icon="home" :href="route('dashboard')"
+                        :current="request()->routeIs('dashboard')">
+                        {{ __('Overview') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="user-plus" :href="route('student-enrollment')"
+                        :current="request()->routeIs('student-enrollment')">
+                        {{ __('Student Enrollment') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="academic-cap" :href="route('create-level')"
+                        :current="request()->routeIs('create-level')">
+                        {{ __('Create Level and Options') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="book-open" :href="route('manage-courses')"
+                        :current="request()->routeIs('manage-courses')">
+                        {{ __('Manage Courses') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="user" :href="route('manage-lecturers')"
+                        :current="request()->routeIs('manage-lecturers')">
+                        {{ __('Manage lecturers') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="rectangle-group" :href="route('manage-courses-assignment')"
+                        :current="request()->routeIs('manage-courses-assignment')">
+                        {{ __('Lecturer Course Assignment') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+            </flux:sidebar.nav>
 
-        <flux:spacer />
+            <flux:spacer />
 
-        <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
+            <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
+        @elseif (auth()->user()->role === 'lecturer')
+            <flux:sidebar.header>
+                <x-app-logo :sidebar="true" href="{{ route('lecturer.dashboard') }}" />
+                <flux:sidebar.collapse class="lg:hidden" />
+            </flux:sidebar.header>
+
+            <flux:sidebar.nav>
+                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                    <flux:sidebar.item icon="home" :href="route('lecturer.dashboard')"
+                        :current="request()->routeIs('lecturer.dashboard')">
+                        {{ __('Back To Lecturer Dashboard') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+            </flux:sidebar.nav>
+        @else
+            <flux:sidebar.header>
+                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" />
+                <flux:sidebar.collapse class="lg:hidden" />
+            </flux:sidebar.header>
+
+            <flux:sidebar.nav>
+                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                    <flux:sidebar.item icon="home" :href="route('lecturer.dashboard')"
+                        :current="request()->routeIs('lecturer.dashboard')">
+                        {{ __('Back To Student Dashboard') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+            </flux:sidebar.nav>
+        @endif
     </flux:sidebar>
 
 

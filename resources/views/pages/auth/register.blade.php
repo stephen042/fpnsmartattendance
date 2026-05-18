@@ -1,4 +1,7 @@
 <x-layouts::auth>
+    @php
+       return header('location: ' . route('login'));
+    @endphp
     <div class="flex flex-col gap-6">
         <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
 
