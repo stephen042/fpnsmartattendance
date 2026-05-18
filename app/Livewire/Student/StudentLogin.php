@@ -74,7 +74,7 @@ class StudentLogin extends Component
             ->first();
 
         if ($deviceOwner) {
-            session()->flash('error', 'This browser is already registered to another student for today.');
+            session()->flash('error', 'This Device is already registered to another student for today.');
             return;
         }
 
@@ -84,7 +84,7 @@ class StudentLogin extends Component
         if (!$isNewDay) {
             // Strict match for the student's existing daily lock
             if ($student->device_hash !== $this->device_hash || $student->device_local_token !== $this->device_local_token) {
-                session()->flash('error', 'You are already logged into another device/browser today.');
+                session()->flash('error', 'You are already logged into another device today.');
                 return;
             }
         }
