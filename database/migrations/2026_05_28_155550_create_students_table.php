@@ -14,17 +14,41 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
 
-            // 🔑 Login identity
             $table->string('application_number')->unique();
-            $table->string('reg_number')->unique();
+            $table->string('matric_number')->unique()->nullable();
 
-            // 🎓 Academic info
             $table->string('full_name');
-            $table->string('email')->nullable()->unique();
-            $table->string('department');
-            $table->string('level'); // ND1, HND1 etc
-            $table->string('program'); // M, E, W  etc
-            $table->string('option')->nullable(); // SWD, NCC etc
+
+            $table->string('email')
+                ->nullable()
+                ->unique()->nullable();
+
+            $table->string('phone')
+                ->nullable();
+
+            $table->enum('gender', [
+                'male',
+                'female'
+            ])->nullable();
+
+            $table->foreignId('department_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('level_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('programme_id')
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->foreignId('course_option_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+
+            // $table->string('password');
 
             // 🔐 Security
             $table->string('device_hash')->nullable();

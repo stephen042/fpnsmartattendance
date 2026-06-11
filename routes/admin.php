@@ -20,4 +20,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::view('manage-courses-assignment', 'admin.manage-courses-assignment')->name('manage-courses-assignment');
     Route::view('edit-courses-assignment/{id}/edit', 'admin.edit-courses-assignment')->name('edit-courses-assignment');
+
+    Route::view('course-registration-students', 'admin.course-registration-students')->name('course-registration-students');
+    Route::view('edit-course-registration/{id}/edit', 'admin.edit-course-registration')->name('edit-course-registration');
+
+    Route::view('settings', 'admin.settings')->name('settings');
 });

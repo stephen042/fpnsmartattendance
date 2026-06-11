@@ -108,19 +108,34 @@
                                 <flux:select.option>Data Structures (SWD416)</flux:select.option>
                             </flux:select>
 
+                            <div class="space-y-2">
+                                <label for="session_end" class="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                    Class Session End Time
+                                </label>
+
+                                <div class="flex items-stretch gap-2">
+                                    <div
+                                        class="flex items-center justify-center px-3 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-500 dark:text-zinc-400 shadow-sm">
+                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="relative flex-1 rounded-lg shadow-sm">
+                                        <input type="text" id="session_end" name="session_end"
+                                            placeholder="Click to select time..." readonly
+                                            class="w-full p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-800 dark:text-zinc-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div
                                 class="flex flex-col md:flex-row gap-8 items-center py-4 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-4 border border-dashed border-zinc-200 dark:border-zinc-700">
-                                {{-- <div class="p-3 bg-white dark:bg-zinc-900 rounded-xl shadow-sm">
-                                    <div class="w-28 h-28 flex items-center justify-center">
-                                        <flux:icon name="qr-code" variant="outline"
-                                            class="size-20 text-zinc-800 dark:text-zinc-200" />
-                                    </div>
-                                </div> --}}
-
                                 <div class="flex-1 w-full space-y-2">
                                     <label class="text-xs font-bold uppercase tracking-wider text-zinc-500">Attendance
-                                        Entry
-                                        Code</label>
+                                        Entry Code</label>
                                     <div class="flex items-center gap-2">
                                         <div
                                             class="flex-1 bg-white dark:bg-zinc-900 py-3 px-4 rounded-lg border border-zinc-200 dark:border-zinc-700 text-center">
@@ -135,10 +150,9 @@
                             <div class="flex gap-3">
                                 <flux:button variant="primary" class="flex-1" icon="play-circle">Start New Session
                                 </flux:button>
-                                {{-- info --}}
                             </div>
-                            <span class="text-sm font-medium text-zinc-500">All other Sessions registered under you will
-                                be ended.</span>
+                            <span class="text-sm font-medium text-zinc-500">All other Sessions registered under you
+                                will be ended.</span>
                         </div>
                     </div>
                 </flux:card>
@@ -166,8 +180,7 @@
                 </flux:card>
 
                 <flux:card class="border-zinc-200 dark:border-zinc-800">
-                    <flux:button variant="danger" class="flex-1" icon="stop-circle">End Current Session
-                    </flux:button>
+                    <flux:button variant="danger" class="flex-1" icon="stop-circle">End Current Session</flux:button>
                 </flux:card>
             </div>
         </div>

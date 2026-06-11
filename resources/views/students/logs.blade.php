@@ -180,6 +180,10 @@
             color: var(--danger);
         }
 
+        .suspended {
+            color: #64748b;
+        }
+
         .time {
             font-size: 13px;
             color: var(--text-muted);
@@ -323,8 +327,8 @@
                     <div class="session-type">Theory • General Intro</div>
                 </div>
                 <div class="time">08:00 AM</div>
-                <div class="status absent">
-                    <i class="fa-solid fa-circle-xmark"></i> Absent
+                <div class="status suspended">
+                    <i class="fa-solid fa-ban"></i> Suspended
                 </div>
             </div>
 

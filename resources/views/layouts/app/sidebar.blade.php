@@ -51,6 +51,14 @@
                         :current="request()->routeIs('manage-courses-assignment')">
                         {{ __('Lecturer Course Assignment') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="identification" :href="route('course-registration-students')"
+                        :current="request()->routeIs('course-registration-students')">
+                        {{ __('Student Course Enrollment') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="cog-6-tooth" :href="route('settings')"
+                        :current="request()->routeIs('settings')">
+                        {{ __('App Settings') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 

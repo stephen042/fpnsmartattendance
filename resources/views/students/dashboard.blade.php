@@ -304,7 +304,7 @@
                 <div class="info-row"
                     style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
                     <span class="info-label" style="color: #64748b; font-size: 0.9rem;">Active Courses</span>
-                    <span class="info-value" style="font-weight: 600; font-size: 0.9rem; color: #10b981;">5 Units</span>
+                    <span class="info-value" style="font-weight: 600; font-size: 0.9rem; color: #10b981;">SWD 317</span>
                 </div>
 
 

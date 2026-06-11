@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->string('session'); // e.g 2024/2025
-            $table->string('semester'); // First / Second
 
             // 🌐 Network rules
             $table->json('ip_config')->nullable();
@@ -24,15 +23,6 @@ return new class extends Migration
                     "restrict_ip": true,
                     "allowed_ip_patterns": ["192.168.1.*"]
                 }
-            */
-
-            // 🎓 Departments
-            $table->json('departments')->nullable();
-            /*
-                [
-                    {"name": "Computer Science", "code": "CSC"},
-                    {"name": "Statistics", "code": "STA"}
-                ]
             */
 
             $table->timestamps();

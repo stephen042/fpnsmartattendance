@@ -6,6 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
+    <x-alert />
     @foreach (['success', 'error', 'info'] as $type)
         @if (session($type))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 6000)" x-show="show" x-transition
@@ -90,6 +91,23 @@
     {{ $slot }}
 
     @fluxScripts
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Simple checker to see if user is running dark mode
+            const isDarkMode = document.documentElement.classList.contains('dark');
+
+            flatpickr("#session_end", {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "h:i K", // Yields user-friendly layout: e.g., "02:30 PM"
+                minuteIncrement: 5, // Snap to 5-minute intervals so users don't have to precisely scroll
+                time_24hr: false,
+                // If dark mode is active on your site, Flatpickr can inject an alternative theme layout if requested.
+            });
+        });
+    </script>
 </body>
 
 </html>
