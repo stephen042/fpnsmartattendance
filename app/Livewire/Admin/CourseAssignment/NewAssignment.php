@@ -41,14 +41,6 @@ class NewAssignment extends Component
         );
     }
 
-    public function assignedCourses()
-    {
-        return $this->hasMany(
-            LecturerCourseAssignment::class,
-            'lecturer_id'
-        );
-    }
-
     public function removeAssignment($id)
     {
         LecturerCourseAssignment::findOrFail($id)->delete();

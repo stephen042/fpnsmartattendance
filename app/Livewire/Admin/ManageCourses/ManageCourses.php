@@ -73,9 +73,13 @@ class ManageCourses extends Component
             'course_option_id' => 'nullable|exists:course_options,id',
         ]);
 
+        if ($this->course_type != 'theory') {
+            $this->course_code = strtoupper($this->course_code.'P');
+        }
+
         Course::create([
             'course_name' => $this->course_name,
-            'course_code' => strtoupper($this->course_code),
+            'course_code' => $this->course_code,
             'course_type' => $this->course_type,
             'level_id' => $this->level_id,
             'course_option_id' => $this->course_option_id ?: null,
@@ -96,6 +100,10 @@ class ManageCourses extends Component
     public function edit($id)
     {
         $course = Course::findOrFail($id);
+
+        if ($course->course_type != 'theory') {
+            $course->course_code = strtoupper($course->course_code.'P');
+        }
 
         $this->editId = $course->id;
         $this->edit_course_name = $course->course_name;

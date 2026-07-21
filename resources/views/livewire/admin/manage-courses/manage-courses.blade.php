@@ -17,8 +17,8 @@
             {{-- Practical Checkbox - Vertical alignment is handled by 'items-end' on the parent grid --}}
             <div class="flex items-center pb-3">
                 <flux:checkbox wire:model="course_type" value="practical" label="Practical" />
-                <span class="text-sm text-zinc-400 md:col-span-6">
-                    Click if this course is a practical course. This will help in categorizing courses for better management and reporting.
+                <span class="text-sm text-zinc-400 md:col-span-6 ml-2">
+                    Click if this course is a practical course. The course code will automatically append a "P" to indicate it's a practical course.
                 </span>
             </div>
 
