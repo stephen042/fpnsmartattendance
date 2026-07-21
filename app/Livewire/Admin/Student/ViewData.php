@@ -12,13 +12,14 @@ class ViewData extends Component
 
     public $search = '';
 
+    // This tells Livewire to use its built-in async Tailwind view
     protected $paginationTheme = 'tailwind';
 
     public function updatingSearch()
     {
         $this->resetPage();
     }
-    
+
     public function refreshData()
     {
         $this->resetPage();

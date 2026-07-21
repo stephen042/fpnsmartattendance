@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('course_options', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('level_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('code');
             $table->timestamps();

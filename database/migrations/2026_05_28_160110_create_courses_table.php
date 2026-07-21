@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('course_name');
             $table->string('course_code');
             $table->enum('course_type', ['theory', 'practical'])->default('theory');
-            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->foreignId('level_id')->constrained()->cascadeOnDelete();
             $table->foreignId('course_option_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();

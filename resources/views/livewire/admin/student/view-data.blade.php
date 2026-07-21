@@ -128,20 +128,17 @@
             display:flex;
             justify-content:space-between;
             align-items:center;
-            margin-top:12px;
-            font-size:12px;
-            color:#6b7280;
+            margin-top:16px;
+            padding-top:14px;
+            border-top:1px solid #e4e4e7;
+            font-size:13px;
+            color:#71717a;
+            font-family: system-ui, -apple-system, sans-serif;
         ">
 
-            <div>
-                Showing {{ $students->firstItem() ?? 0 }}
-                -
-                {{ $students->lastItem() ?? 0 }}
-                of {{ $students->total() }}
-            </div>
-
-            <div>
-                {{ $students->links() }}
+            {{-- Target Wrapper to cleanly box Livewire's native async buttons --}}
+            <div class="custom-pagination-container" style="max-width: 100%;">
+                {{ $students->links(data: ['scrollTo' => false]) }}
             </div>
 
         </div>

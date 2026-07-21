@@ -11,13 +11,19 @@ class LecturerCourseAssignment extends Model
         'course_id',
     ];
 
-    // public function lecturer()
-    // {
-    //     return $this->belongsTo(User::class, 'lecturer_id');
-    // }
+    public function lecturer()
+    {
+        return $this->belongsTo(
+            User::class,
+            'lecturer_id'
+        );
+    }
 
-    // public function course()
-    // {
-    //     return $this->belongsTo(Course::class);
-    // }
+    public function course()
+    {
+        return $this->belongsTo(
+            Course::class,
+            'course_id'
+        );
+    }
 }
