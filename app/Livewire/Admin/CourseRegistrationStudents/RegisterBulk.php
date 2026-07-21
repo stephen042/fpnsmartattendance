@@ -6,10 +6,7 @@ use App\Jobs\ProcessBulkCourseRegistration;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-<<<<<<< HEAD
 use Livewire\WithPagination;
-=======
->>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
 use Maatwebsite\Excel\Facades\Excel;
 
 class RegisterBulk extends Component
@@ -19,7 +16,6 @@ class RegisterBulk extends Component
     public $file;
     public array $rows = [];
 
-<<<<<<< HEAD
     // Pagination properties for in-memory array
     public int $page = 1;
     public int $perPage = 10;
@@ -28,11 +24,6 @@ class RegisterBulk extends Component
     {
         $this->rows = [];
         $this->page = 1;
-=======
-    public function updatedFile()
-    {
-        $this->rows = [];
->>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
 
         $data = Excel::toArray([], $this->file);
         $sheet = $data[0] ?? [];
@@ -53,7 +44,6 @@ class RegisterBulk extends Component
         }
     }
 
-<<<<<<< HEAD
     // Computed property for paginating array rows
     public function getPaginatedRowsProperty()
     {
@@ -61,30 +51,21 @@ class RegisterBulk extends Component
         return array_slice($this->rows, $offset, $this->perPage);
     }
 
-=======
->>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
     public function removeRow($index)
     {
         unset($this->rows[$index]);
         $this->rows = array_values($this->rows);
-<<<<<<< HEAD
 
         // Adjust page number if current page becomes empty
         $maxPage = max(1, (int) ceil(count($this->rows) / $this->perPage));
         if ($this->page > $maxPage) {
             $this->page = $maxPage;
         }
-=======
->>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
     }
 
     public function clearQueue()
     {
-<<<<<<< HEAD
         $this->reset(['rows', 'file', 'page']);
-=======
-        $this->reset(['rows', 'file']);
->>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
     }
 
     public function finalize()
