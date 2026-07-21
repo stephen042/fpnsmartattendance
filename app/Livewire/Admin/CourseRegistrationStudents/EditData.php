@@ -129,7 +129,10 @@ class EditData extends Component
         $activeCourses = Course::whereIn('id', $this->registeredCourseIds)->get();
 
         $availableCourses = Course::where('level_id', $this->levelId)
+<<<<<<< HEAD
             ->where('semester_id', $this->semesterId) // Filter by active semester
+=======
+>>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
             ->when(! empty($this->courseOptionId), function ($q) {
                 $q->where('course_option_id', $this->courseOptionId);
             })

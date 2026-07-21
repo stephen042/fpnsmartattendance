@@ -17,8 +17,13 @@
             {{-- Practical Checkbox --}}
             <div class="flex items-center pb-3">
                 <flux:checkbox wire:model="course_type" value="practical" label="Practical" />
+<<<<<<< HEAD
                 <span class="text-xs text-zinc-400 ml-2">
                     Appends "P" automatically if selected.
+=======
+                <span class="text-sm text-zinc-400 md:col-span-6 ml-2">
+                    Click if this course is a practical course. The course code will automatically append a "P" to indicate it's a practical course.
+>>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
                 </span>
             </div>
 

@@ -128,6 +128,7 @@
                     </flux:subheading>
                 </div>
 
+<<<<<<< HEAD
                 {{-- Filters Section --}}
                 <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
 
@@ -149,6 +150,11 @@
                             placeholder="Search assignments..." />
                     </div>
 
+=======
+                <div class="w-full sm:max-w-xs">
+                    <flux:input wire:model.live.debounce.500ms="search" size="sm" icon="magnifying-glass"
+                        placeholder="Search assignments..." />
+>>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
                 </div>
 
             </div>
@@ -197,6 +203,7 @@
 
                                                     <span
                                                         class="font-mono font-bold text-zinc-500 dark:text-zinc-400 w-16 shrink-0">
+<<<<<<< HEAD
                                                         {{ $assignment->course->course_code }}
                                                     </span>
 
@@ -210,10 +217,29 @@
                                                     class="flex items-center gap-4 shrink-0 text-xs font-medium text-zinc-500 dark:text-zinc-400">
 
                                                     {{-- Level --}}
+=======
+
+                                                        {{ $assignment->course->course_code }}
+
+                                                    </span>
+
+                                                    <span class="text-zinc-800 dark:text-zinc-200 truncate">
+
+                                                        {{ $assignment->course->course_name }}
+
+                                                    </span>
+
+                                                </div>
+
+                                                <div
+                                                    class="flex items-center gap-6 shrink-0 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+
+>>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
                                                     <span class="w-16 text-center">
                                                         {{ $assignment->course->level?->slug }}
                                                     </span>
 
+<<<<<<< HEAD
                                                     {{-- Semester Column --}}
                                                     <span class="w-24 text-center">
                                                         <flux:badge color="indigo" size="sm">
@@ -227,6 +253,14 @@
                                                     </span>
 
                                                     {{-- Remove Action --}}
+=======
+                                                    <span class="w-12 text-right">
+
+                                                        {{ $assignment->course->course_type === 'practical' ? 'Pract' : 'Theo' }}
+
+                                                    </span>
+
+>>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
                                                     <flux:button wire:click="removeAssignment({{ $assignment->id }})"
                                                         wire:confirm="Remove this assignment?" variant="ghost"
                                                         size="sm" icon="trash"
@@ -240,6 +274,20 @@
                                     </div>
 
                                 </flux:table.cell>
+<<<<<<< HEAD
+=======
+
+                            </flux:table.row>
+                        @endif
+
+                    @empty
+
+                        <flux:table.row>
+
+                            <flux:table.cell colspan="2" class="text-center py-10 text-zinc-500">
+
+                                No assignments found.
+>>>>>>> bdbae82bf891f35a56e581b67be80b9749ccf902
 
                             </flux:table.row>
                         @endif
