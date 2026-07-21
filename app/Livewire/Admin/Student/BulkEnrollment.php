@@ -87,7 +87,7 @@ class BulkEnrollment extends Component
 
         session()->flash(
             'success',
-            count($this->rows) . ' students queued for processing. Running in background...,Click refresh or wait a moment to see results.'
+            count($this->rows) . ' students queued for processing. Running in background...,wait a moments to see results. after a while, refresh the page to see the updated list of students.'
         );
 
         $this->reset(['rows', 'file']);

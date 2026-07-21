@@ -2,7 +2,7 @@
     <flux:card class="bg-zinc-50/80 dark:bg-zinc-900/50 border-zinc-200/60 shadow-sm">
         <div class="flex items-center gap-2 mb-6">
             <flux:icon name="book-open" variant="outline" class="text-zinc-400" />
-            <flux:heading size="lg">Create Management</flux:heading>
+            <flux:heading size="lg">Course Catalog Management</flux:heading>
         </div>
 
         {{-- Add Course Form --}}
@@ -14,18 +14,16 @@
 
             <flux:input wire:model="course_code" label="Course Code" />
 
-            {{-- Practical Checkbox - Vertical alignment is handled by 'items-end' on the parent grid --}}
+            {{-- Practical Checkbox --}}
             <div class="flex items-center pb-3">
                 <flux:checkbox wire:model="course_type" value="practical" label="Practical" />
-                <span class="text-sm text-zinc-400 md:col-span-6">
-                    Click if this course is a practical course. This will help in categorizing courses for better management and reporting.
+                <span class="text-xs text-zinc-400 ml-2">
+                    Appends "P" automatically if selected.
                 </span>
             </div>
 
             <flux:select wire:model.live="level_id" label="Level">
-                <flux:select.option value="">
-                    Select Level
-                </flux:select.option>
+                <flux:select.option value="">Select Level</flux:select.option>
                 @foreach ($levels as $level)
                     <flux:select.option value="{{ $level->id }}">
                         {{ $level->slug }}
@@ -33,12 +31,18 @@
                 @endforeach
             </flux:select>
 
+            <flux:select wire:model="semester_id" label="Semester">
+                <flux:select.option value="">Select Semester</flux:select.option>
+                @foreach ($semesters as $semester)
+                    <flux:select.option value="{{ $semester->id }}">
+                        {{ $semester->name }}
+                    </flux:select.option>
+                @endforeach
+            </flux:select>
+
             @if ($courseOptions->count())
                 <flux:select wire:model="course_option_id" label="Course Option">
-                    <flux:select.option value="">
-                        Select Option
-                    </flux:select.option>
-
+                    <flux:select.option value="">Select Option</flux:select.option>
                     @foreach ($courseOptions as $option)
                         <flux:select.option value="{{ $option->id }}">
                             {{ $option->name }}
@@ -58,6 +62,7 @@
             <flux:table.columns>
                 <flux:table.column>Course Details</flux:table.column>
                 <flux:table.column align="center">Level</flux:table.column>
+                <flux:table.column align="center">Semester</flux:table.column>
                 <flux:table.column align="center">Option</flux:table.column>
                 <flux:table.column align="center">Action</flux:table.column>
             </flux:table.columns>
@@ -93,6 +98,12 @@
                         </flux:table.cell>
 
                         <flux:table.cell align="center">
+                            <flux:badge color="indigo">
+                                {{ $course->semester?->name ?? 'N/A' }}
+                            </flux:badge>
+                        </flux:table.cell>
+
+                        <flux:table.cell align="center">
                             {{ $course->option?->name ?? 'General' }}
                         </flux:table.cell>
 
@@ -116,7 +127,7 @@
         <div>
             <flux:heading size="lg">Edit Course Details</flux:heading>
             <flux:subheading>
-                Modify course settings for the current semester.
+                Modify course settings for the selected semester.
             </flux:subheading>
         </div>
 
@@ -140,12 +151,17 @@
                 @endforeach
             </flux:select>
 
+            <flux:select wire:model="edit_semester_id" label="Semester">
+                @foreach ($semesters as $semester)
+                    <flux:select.option value="{{ $semester->id }}">
+                        {{ $semester->name }}
+                    </flux:select.option>
+                @endforeach
+            </flux:select>
+
             @if ($editCourseOptions->count())
                 <flux:select wire:model="edit_course_option_id" label="Course Option">
-                    <flux:select.option value="">
-                        Select Option
-                    </flux:select.option>
-
+                    <flux:select.option value="">Select Option</flux:select.option>
                     @foreach ($editCourseOptions as $option)
                         <flux:select.option value="{{ $option->id }}">
                             {{ $option->name }}
@@ -165,9 +181,7 @@
 
             <div class="flex gap-2">
                 <flux:modal.close>
-                    <flux:button variant="ghost">
-                        Cancel
-                    </flux:button>
+                    <flux:button variant="ghost">Cancel</flux:button>
                 </flux:modal.close>
 
                 <flux:button wire:click="updateCourse" variant="primary">

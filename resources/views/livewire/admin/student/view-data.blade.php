@@ -81,7 +81,7 @@
                             <td style="padding:12px;">
                                 <span
                                     style="padding:4px 10px; border-radius:999px; background:#e0f2fe; color:#0369a1; font-size:11px;">
-                                    {{ $student->level->name ?? '-' }}
+                                    {{ $student->level->slug ?? '-' }}
                                 </span>
                             </td>
 
@@ -90,7 +90,7 @@
                             </td>
 
                             <td style="padding:12px;">
-                                {{ $student->courseOption->name ?? 'N/A' }}
+                                {{ $student->courseOption->code ?? 'N/A' }}
                             </td>
 
                             <td style="padding:12px; font-family:monospace;">

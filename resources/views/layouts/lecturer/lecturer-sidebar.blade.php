@@ -6,7 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
-    <x-alert />
+    {{-- <x-alert /> --}}
     @foreach (['success', 'error', 'info'] as $type)
         @if (session($type))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 6000)" x-show="show" x-transition

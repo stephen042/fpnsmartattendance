@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\ManageCourses;
 use App\Models\Course;
 use App\Models\CourseOption;
 use App\Models\Level;
+use App\Models\Semester;
 use Livewire\Component;
 
 class ManageCourses extends Component
@@ -16,6 +17,8 @@ class ManageCourses extends Component
     public $course_type = 'theory';
 
     public $level_id = '';
+
+    public $semester_id = '';
 
     public $course_option_id = '';
 
@@ -30,6 +33,8 @@ class ManageCourses extends Component
     public $edit_course_code = '';
 
     public $edit_level_id = '';
+
+    public $edit_semester_id = '';
 
     public $edit_course_option_id = '';
 
@@ -70,14 +75,20 @@ class ManageCourses extends Component
             'course_name' => 'required|string|max:255',
             'course_code' => 'required|string|max:255',
             'level_id' => 'required|exists:levels,id',
+            'semester_id' => 'required|exists:semesters,id',
             'course_option_id' => 'nullable|exists:course_options,id',
         ]);
 
+        if ($this->course_type != 'theory') {
+            $this->course_code = strtoupper($this->course_code.'P');
+        }
+
         Course::create([
             'course_name' => $this->course_name,
-            'course_code' => strtoupper($this->course_code),
+            'course_code' => $this->course_code,
             'course_type' => $this->course_type,
             'level_id' => $this->level_id,
+            'semester_id' => $this->semester_id,
             'course_option_id' => $this->course_option_id ?: null,
         ]);
 
@@ -85,6 +96,7 @@ class ManageCourses extends Component
             'course_name',
             'course_code',
             'level_id',
+            'semester_id',
             'course_option_id',
         ]);
 
@@ -97,10 +109,15 @@ class ManageCourses extends Component
     {
         $course = Course::findOrFail($id);
 
+        if ($course->course_type != 'theory') {
+            $course->course_code = strtoupper($course->course_code.'P');
+        }
+
         $this->editId = $course->id;
         $this->edit_course_name = $course->course_name;
         $this->edit_course_code = $course->course_code;
         $this->edit_level_id = $course->level_id;
+        $this->edit_semester_id = $course->semester_id;
         $this->edit_course_option_id = $course->course_option_id;
         $this->edit_is_practical = $course->course_type === 'practical';
 
@@ -116,6 +133,7 @@ class ManageCourses extends Component
             'edit_course_name' => 'required|string|max:255',
             'edit_course_code' => 'required|string|max:255',
             'edit_level_id' => 'required|exists:levels,id',
+            'edit_semester_id' => 'required|exists:semesters,id',
             'edit_course_option_id' => 'nullable|exists:course_options,id',
         ]);
 
@@ -124,6 +142,7 @@ class ManageCourses extends Component
             'course_code' => strtoupper($this->edit_course_code),
             'course_type' => $this->edit_is_practical ? 'practical' : 'theory',
             'level_id' => $this->edit_level_id,
+            'semester_id' => $this->edit_semester_id,
             'course_option_id' => $this->edit_course_option_id ?: null,
         ]);
 
@@ -141,9 +160,11 @@ class ManageCourses extends Component
     {
         return view('livewire.admin.manage-courses.manage-courses', [
             'levels' => Level::orderBy('name')->get(),
+            'semesters' => Semester::orderBy('name')->get(),
 
             'courses' => Course::with([
                 'level',
+                'semester',
                 'option',
             ])
                 ->latest()

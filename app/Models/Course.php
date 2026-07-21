@@ -11,6 +11,7 @@ class Course extends Model
         'course_code',
         'course_type',
         'department_id',
+        'semester_id',
         'level_id',
         'course_option_id',
     ];
@@ -36,6 +37,11 @@ class Course extends Model
             LecturerCourseAssignment::class,
             'course_id'
         );
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
     }
 
 }
