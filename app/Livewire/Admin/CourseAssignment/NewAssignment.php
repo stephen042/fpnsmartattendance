@@ -23,10 +23,48 @@ class NewAssignment extends Component
         $this->validate([
             'lecturer_id' => 'required|exists:users,id',
             'selectedCourses' => 'required|array|min:1',
+        ], [
+            'lecturer_id.required' => 'Please select a lecturer.',
+            'selectedCourses.required' => 'Please select at least one course.',
+            'selectedCourses.min' => 'Please select at least one course.',
         ]);
 
+        $errors = [];
+
         foreach ($this->selectedCourses as $courseId) {
-            LecturerCourseAssignment::firstOrCreate([
+            $course = Course::find($courseId);
+            $courseIdentifier = $course
+                ? "{$course->course_code} - {$course->course_name}".($course->course_type === 'practical' ? ' (Practical)' : '')
+                : "Course ID {$courseId}";
+
+            // Check if course is already assigned to ANY lecturer
+            $existingAssignment = LecturerCourseAssignment::with('lecturer')
+                ->where('course_id', $courseId)
+                ->first();
+
+            if ($existingAssignment) {
+                // Scenario A: Already assigned to the same selected lecturer
+                if ($existingAssignment->lecturer_id == $this->lecturer_id) {
+                    $errors[] = "{$courseIdentifier} is already assigned to this lecturer.";
+                }
+                // Scenario B: Already assigned to a different lecturer
+                else {
+                    $lecturerName = $existingAssignment->lecturer?->name ?? 'another lecturer';
+                    $errors[] = "{$courseIdentifier} is already assigned to {$lecturerName}.";
+                }
+            }
+        }
+
+        // If there are conflict errors, flash them to session and halt execution
+        if (! empty($errors)) {
+            session()->flash('error', implode(' ', $errors));
+
+            return;
+        }
+
+        // If validation passed for all courses, perform inserts
+        foreach ($this->selectedCourses as $courseId) {
+            LecturerCourseAssignment::create([
                 'lecturer_id' => $this->lecturer_id,
                 'course_id' => $courseId,
             ]);
@@ -37,20 +75,14 @@ class NewAssignment extends Component
             'selectedCourses',
         ]);
 
-        session()->flash(
-            'success',
-            'Courses assigned successfully.'
-        );
+        session()->flash('success', 'Courses assigned successfully.');
     }
 
     public function removeAssignment($id)
     {
         LecturerCourseAssignment::findOrFail($id)->delete();
 
-        session()->flash(
-            'success',
-            'Course assignment removed successfully.'
-        );
+        session()->flash('success', 'Course assignment removed successfully.');
     }
 
     public function render()
